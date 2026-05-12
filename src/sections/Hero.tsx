@@ -53,7 +53,7 @@ export default function Hero() {
           </button>
           <button
             onClick={() => navigate('/dashboard')}
-            className="wavy-pill bg-transparent border border-[#222] text-white text-sm md:text-base px-10 py-4 hover:border-[#00D4FF] hover:text-[#00D4FF]"
+            className="wavy-pill bg-transparent border border-[#222] text-black text-sm md:text-base px-10 py-4 hover:border-[#00D4FF] hover:text-[#00D4FF]"
           >
             View Demo
           </button>
