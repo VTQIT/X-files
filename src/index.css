@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: #0A0A0A;
+    --color-bg-elevated: #111111;
+    --color-bg-surface: #1A1A1A;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #888888;
+    --color-text-tertiary: #555555;
+    --color-accent-orange: #FF6B35;
+    --color-accent-cyan: #00D4FF;
+    --color-accent-green: #39FF14;
+    --color-accent-purple: #8B5CF6;
+    --color-border: #222222;
+    --color-border-glow: rgba(255,107,53,0.3);
+    --color-glass: rgba(17,17,17,0.85);
+
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 17 100% 60%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 187 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
+    --ring: 17 100% 60%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-[#222222];
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-hero {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  .text-h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+  }
+
+  .text-h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .glass-panel {
+    background: rgba(17, 17, 17, 0.6);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .wavy-pill {
+    border-radius: 45% 55% 55% 45% / 50% 50% 50% 50%;
+    transition: border-radius 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .wavy-pill:hover {
+    border-radius: 55% 45% 45% 55% / 50% 50% 50% 50%;
+    transform: scale(1.03);
+  }
+
+  .checkerboard-border {
+    padding: 2px;
+    background: conic-gradient(
+      var(--card-accent, #FF6B35) 90deg,
+      transparent 90deg 180deg,
+      var(--card-accent, #FF6B35) 180deg 270deg,
+      transparent 270deg
+    );
+    background-size: 8px 8px;
+    background-repeat: repeat;
+    transition: background 0.3s ease;
+  }
+
+  .holographic-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.03) 100%),
+      var(--color-bg-elevated);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .holographic-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 55%, transparent 60%);
+    background-size: 200% 100%;
+    animation: sheenSweep 4s linear infinite;
+    pointer-events: none;
+  }
+
+  .holographic-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(from 180deg at 50% 50%, #FF6B35 0deg, #00D4FF 90deg, #39FF14 180deg, #8B5CF6 270deg, #FF6B35 360deg);
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+
+  .holographic-card:hover::after {
+    opacity: 0.6;
+  }
+}
+
+@keyframes sheenSweep {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.5); }
+}
+
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
